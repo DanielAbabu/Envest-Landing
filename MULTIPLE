@@ -1,0 +1,157 @@
+import type { CSSProperties, ReactNode } from "react"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import Link from "next/link"
+
+export type AppTheme = {
+  // brand and backgrounds
+  bg: string
+  bg2: string
+  bg3: string
+  bgAlt: string
+  surface: string
+  border: string
+  // text
+  text: string
+  textMuted: string
+  // accents
+  accent: string
+  onAccent: string
+  success: string
+  successHover: string
+  onSuccess: string
+}
+
+export const defaultTheme: AppTheme = {
+  // Primary brand base and gradient partner
+  bg: "#032d42",
+  bg2: "#076B9D",
+  bg3: "#032d42",
+  bgAlt: "#021e2d",
+  surface: "rgba(255,255,255,0.05)",
+  border: "rgba(255,255,255,0.10)",
+  text: "#ffffff",
+  textMuted: "rgba(255,255,255,0.80)",
+  accent: "#8bd5ff",
+  onAccent: "#000000",
+  // Replace all green usages with your orange
+  success: "#D74E09",
+  successHover: "#B54308",
+  onSuccess: "#ffffff",
+}
+
+function toCSSVars(theme: AppTheme): CSSProperties {
+  return {
+    ["--color-bg" as any]: theme.bg,
+    ["--color-bg-2" as any]: theme.bg2,
+    ["--color-bg-3" as any]: theme.bg3,
+    ["--color-bg-alt" as any]: theme.bgAlt,
+    ["--color-surface" as any]: theme.surface,
+    ["--color-border" as any]: theme.border,
+    ["--color-text" as any]: theme.text,
+    ["--color-text-muted" as any]: theme.textMuted,
+    ["--color-accent" as any]: theme.accent,
+    ["--color-on-accent" as any]: theme.onAccent,
+    ["--color-success" as any]: theme.success,
+    ["--color-success-hover" as any]: theme.successHover,
+    ["--color-on-success" as any]: theme.onSuccess,
+  } as CSSProperties
+}
+
+export function AppThemeProvider({
+  theme = defaultTheme,
+  children,
+}: {
+  theme?: AppTheme
+  children: ReactNode
+}) {
+  return (
+    <div style={toCSSVars(theme)} className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
+      {children}
+    </div>
+  )
+}
+
+// components/hero.tsx
+function Hero() {
+  const openDialog = (data: any) => {
+    // dialog logic here
+  }
+
+  return (
+    <div>
+      {/* other hero content here */}
+      <Button
+        size="lg"
+        variant="outline"
+        onClick={() => openDialog({ interest: "Academy" })}
+        className="hover:brightness-110"
+        style={{ borderColor: "var(--color-accent)", color: "var(--color-accent)" }}
+      >
+        Join the AI Academy
+      </Button>
+    </div>
+  )
+}
+
+// components/flagship-project.tsx
+function FlagshipProject() {
+  return (
+    <div>
+      {/* other project content here */}
+      <Button
+        asChild
+        className="hover:brightness-110"
+        style={{ background: "var(--color-surface)", color: "var(--color-text)" }}
+      >
+        <Link href="/under-construction">See How It Works</Link>
+      </Button>
+    </div>
+  )
+}
+
+// components/social-proof.tsx
+function SocialProof() {
+  return (
+    <div>
+      {/* other social proof content here */}
+      <div className="mt-3 flex flex-wrap gap-2">
+        <Badge style={{ background: "var(--color-surface)", color: "var(--color-text)" }}>
+          SDG 4: Quality Education
+        </Badge>
+        <Badge className="hover:brightness-110" style={{ background: "var(--color-success)", color: "var(--color-on-success)" }}>
+          SDG 8: Decent Work
+        </Badge>
+        <Badge className="hover:brightness-110" style={{ background: "var(--color-accent)", color: "var(--color-on-accent)" }}>
+          SDG 9: Industry & Innovation
+        </Badge>
+      </div>
+    </div>
+  )
+}
+
+// app/under-construction/page.tsx
+export default function UnderConstruction() {
+  return (
+    <div>
+      {/* other content here */}
+      <div className="mt-6 flex items-center justify-center gap-3">
+        <Button
+          asChild
+          className="hover:brightness-110"
+          style={{ background: "var(--color-surface)", color: "var(--color-text)" }}
+        >
+          <Link href="/">Back to Home</Link>
+        </Button>
+        <Button
+          asChild
+          variant="outline"
+          className="bg-transparent hover:brightness-110"
+          style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}
+        >
+          <Link href="/">Register Interest</Link>
+        </Button>
+      </div>
+    </div>
+  )
+}

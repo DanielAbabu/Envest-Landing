@@ -1,0 +1,920 @@
+// app/layout.tsx
+import type { Metadata } from "next"
+import "./globals.css"
+import { Poppins } from 'next/font/google'
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+})
+
+export const metadata: Metadata = {
+  title: "Envest Technologies",
+  description: "Driving development with applied AI and automation in Ethiopia.",
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body className={`${poppins.className} bg-[#032d42] text-white antialiased`}>
+        {children}
+      </body>
+    </html>
+  )
+}
+
+// app/page.tsx
+import { RegistrationProvider } from "@/components/registration-provider"
+import { SiteHeader } from "@/components/site-header"
+import { Hero } from "@/components/hero"
+import { IntroSnapshot } from "@/components/intro-snapshot"
+import { FlagshipProject } from "@/components/flagship-project"
+import { FeaturedInsight } from "@/components/featured-insight"
+import { OfferingsGrid } from "@/components/offerings-grid"
+import { SocialProof } from "@/components/social-proof"
+import { SiteFooter } from "@/components/site-footer"
+import { MobileStickyCTA } from "@/components/mobile-sticky-cta"
+
+export default function Page() {
+  return (
+    <RegistrationProvider>
+      <div className="min-h-screen flex flex-col">
+        <SiteHeader />
+        <main className="flex-1">
+          <Hero />
+          <IntroSnapshot />
+          <FlagshipProject />
+          <FeaturedInsight />
+          <OfferingsGrid />
+          <SocialProof />
+        </main>
+        <SiteFooter />
+        <MobileStickyCTA />
+      </div>
+    </RegistrationProvider>
+  )
+}
+
+// components/site-header.tsx
+"use client"
+
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Menu } from 'lucide-react'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { usePathname } from "next/navigation"
+import { cn } from "@/lib/utils"
+import { useRegistration } from "./registration-provider"
+
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/under-construction", label: "AI Automation" },
+  { href: "/under-construction", label: "AI Academy" },
+  { href: "/under-construction", label: "Insights" },
+  { href: "/under-construction", label: "About" },
+]
+
+export function SiteHeader({ className = "" }: { className?: string }) {
+  const pathname = usePathname()
+  const { openDialog } = useRegistration()
+
+  return (
+    <header
+      className={cn(
+        "sticky top-0 z-40 w-full border-b border-white/10 bg-[#032d42]/80 backdrop-blur",
+        className
+      )}
+    >
+      <div className="container mx-auto flex items-center justify-between py-3 px-4">
+        <Link href="/" className="inline-flex items-center gap-2">
+          <div className="h-8 w-8 rounded-md bg-gradient-to-br from-white to-[#10B981]" aria-hidden />
+          <span className="text-xl font-semibold tracking-tight">Envest Technologies</span>
+        </Link>
+
+        <nav className="hidden md:flex items-center gap-6">
+          {nav.map((n) => (
+            <Link
+              key={n.label}
+              href={n.href}
+              className={cn(
+                "text-sm transition-colors",
+                pathname === n.href ? "text-white font-medium" : "text-white/70 hover:text-white"
+              )}
+            >
+              {n.label}
+            </Link>
+          ))}
+          <Button onClick={() => openDialog({ interest: "General" })} className="bg-[#10B981] hover:bg-[#059669]">
+            Get Started
+          </Button>
+        </nav>
+
+        <div className="md:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon" aria-label="Open menu" className="border-white/20 text-white bg-transparent">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="bg-[#032d42] text-white border-l border-white/10">
+              <SheetHeader>
+                <SheetTitle>Envest Technologies</SheetTitle>
+              </SheetHeader>
+              <div className="mt-4 flex flex-col gap-3">
+                {nav.map((n) => (
+                  <Link key={n.label} href={n.href} className="text-base text-white/90">
+                    {n.label}
+                  </Link>
+                ))}
+                <Button onClick={() => openDialog({ interest: "General" })} className="mt-2 bg-[#10B981] hover:bg-[#059669]">
+                  Get Started
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </header>
+  )
+}
+
+// components/hero.tsx
+"use client"
+
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { CheckCircle2 } from 'lucide-react'
+import { useRegistration } from "./registration-provider"
+
+export function Hero({
+  headline = "Driving Development. Empowering Businesses.",
+  subheadline = "Transforming Ethiopia Through Applied AI and Automation.",
+  supporting = "Harnessing AI to automate systems, equip talent, and accelerate development.",
+}: {
+  headline?: string
+  subheadline?: string
+  supporting?: string
+}) {
+  const { openDialog } = useRegistration()
+
+  return (
+    <section className="relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#032d42] via-[#073b54] to-[#0b4f70]" aria-hidden />
+      <div className="container mx-auto px-4 py-16 md:py-24 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <div className="text-white">
+            <p className="text-sm font-medium text-[#8bd5ff] mb-2">Envest Technologies</p>
+            <h1 className="text-3xl md:text-5xl font-bold leading-tight">{headline}</h1>
+            <p className="mt-3 text-xl text-white/80">{subheadline}</p>
+            <p className="mt-4 text-white/70">{supporting}</p>
+
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <Button
+                size="lg"
+                onClick={() => openDialog({ interest: "Automation" })}
+                className="bg-[#10B981] hover:bg-[#059669] text-white"
+              >
+                Explore Our AI Solutions
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() => openDialog({ interest: "Academy" })}
+                className="border-[#8bd5ff] text-[#8bd5ff] hover:bg-white/10"
+              >
+                Join the AI Academy
+              </Button>
+            </div>
+
+            <div className="mt-6 flex items-center gap-4 text-sm text-white/80">
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-4 w-4 text-[#10B981]" /> Local-first impact
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-4 w-4 text-[#10B981]" /> Ethical AI
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <CheckCircle2 className="h-4 w-4 text-[#10B981]" /> Partnership-ready
+              </span>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="relative rounded-xl overflow-hidden ring-1 ring-white/10">
+              <Image
+                src="/ethiopian-ai-professionals.png"
+                width={800}
+                height={520}
+                alt="Ethiopian professionals using AI tools"
+                className="w-full h-auto object-cover"
+                priority
+              />
+            </div>
+            <div className="hidden md:block absolute -bottom-6 -left-6 w-40 h-40 rounded-lg overflow-hidden ring-1 ring-white/10">
+              <Image
+                src="/ai-analytics-dashboard.png"
+                alt="AI dashboard"
+                width={160}
+                height={160}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="hidden md:block absolute -top-6 -right-6 w-44 h-28 rounded-lg overflow-hidden ring-1 ring-white/10">
+              <Image
+                src="/local-impact-farmers-health.png"
+                alt="Local impact: farmers and health workers"
+                width={176}
+                height={112}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// components/intro-snapshot.tsx
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Cpu, GraduationCap, Handshake, Leaf } from 'lucide-react'
+
+const stats = [
+  { icon: Cpu, label: "Workflows automated", value: "50+" },
+  { icon: GraduationCap, label: "Professionals trained", value: "1,000+" },
+  { icon: Handshake, label: "Partners & clients", value: "10+" },
+  { icon: Leaf, label: "Sectors served", value: "Agri, Health, Edu" },
+]
+
+export function IntroSnapshot({
+  tagline = "Innovating for Ethiopia’s Future",
+  text = "Envest Technologies designs intelligent systems for development and enterprise, delivers AI training to close skills gaps, and researches local AI solutions for agriculture, health, and beyond.",
+}: {
+  tagline?: string
+  text?: string
+}) {
+  return (
+    <section className="py-12 md:py-16 bg-gradient-to-b from-transparent to-[#073b54]">
+      <div className="container mx-auto px-4">
+        <div className="mx-auto max-w-3xl text-center">
+          <Badge className="bg-transparent border border-white/20 text-white hover:bg-white/10">Snapshot</Badge>
+          <h2 className="mt-3 text-2xl md:text-3xl font-semibold text-white">{tagline}</h2>
+          <p className="mt-3 text-white/80">{text}</p>
+        </div>
+
+        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {stats.map((s, i) => (
+            <Card key={i} className="border-white/10 bg-white/5 backdrop-blur-sm">
+              <CardContent className="p-4 flex items-center gap-3">
+                <s.icon className="h-5 w-5 text-[#8bd5ff]" />
+                <div>
+                  <div className="text-lg font-semibold text-white">{s.value}</div>
+                  <div className="text-xs text-white/70">{s.label}</div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// components/flagship-project.tsx
+import Image from "next/image"
+import Link from "next/link"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Sparkles } from 'lucide-react'
+
+export function FlagshipProject({
+  title = "AI-Assisted Learning Platform",
+  description = "Our LMS blends AI-powered feedback with practical training for development professionals, bridging education with real-world needs.",
+}: {
+  title?: string
+  description?: string
+}) {
+  return (
+    <section className="py-12 md:py-16 bg-gradient-to-b from-[#073b54] to-[#032d42]">
+      <div className="container mx-auto px-4">
+        <Card className="overflow-hidden border-white/10 bg-white/5 backdrop-blur-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            <div className="p-6 md:p-8">
+              <CardHeader className="p-0">
+                <div className="inline-flex items-center gap-2 text-[#8bd5ff]">
+                  <Sparkles className="h-5 w-5" />
+                  <span className="text-sm font-medium">Flagship Project</span>
+                </div>
+                <CardTitle className="mt-2 text-2xl md:text-3xl text-white">{title}</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0 mt-3 text-white/80">
+                <p>{description}</p>
+                <ul className="mt-4 list-disc pl-5 space-y-1">
+                  <li>{"Personalized AI feedback on assignments"}</li>
+                  <li>{"Hands-on labs aligned to Ethiopian market needs"}</li>
+                  <li>{"Analytics for learners, mentors, and organizations"}</li>
+                </ul>
+                <div className="mt-6">
+                  <Button asChild className="bg-white/10 hover:bg-white/20 text-white">
+                    <Link href="/under-construction">See How It Works</Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </div>
+            <div className="relative min-h-[240px] md:min-h-[360px]">
+              <Image
+                src="/ai-learning-ethiopian-professionals.png"
+                alt="AI-Assisted Learning Platform mockup"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </Card>
+      </div>
+    </section>
+  )
+}
+
+// components/featured-insight.tsx
+"use client"
+
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Repeat, ArrowRight } from 'lucide-react'
+
+const insights = [
+  {
+    title: "Automated crop disease detection for 50+ cooperatives.",
+    detail: "Deployed mobile vision workflows to flag early-stage leaf infections.",
+  },
+  {
+    title: "Digitized patient triage for rural clinics.",
+    detail: "Reduced intake time by 30% with AI-assisted forms and routing.",
+  },
+  {
+    title: "Optimized NGO grant reporting.",
+    detail: "Automations consolidated data across 6 systems with validation.",
+  },
+]
+
+export function FeaturedInsight({
+  sectionTitle = "What We Automated This Week",
+  rotateMs = 5000,
+}: {
+  sectionTitle?: string
+  rotateMs?: number
+}) {
+  const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setIndex((prev) => (prev + 1) % insights.length)
+    }, rotateMs)
+    return () => clearInterval(t)
+  }, [rotateMs])
+
+  const current = insights[index]
+
+  return (
+    <section className="py-12 md:py-16 bg-gradient-to-b from-[#032d42] to-[#073b54]">
+      <div className="container mx-auto px-4">
+        <Card className="border-white/10 bg-white/5 backdrop-blur-sm">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle className="text-xl md:text-2xl text-white">{sectionTitle}</CardTitle>
+            <Button variant="outline" size="sm" className="hidden md:inline-flex border-white/20 text-white bg-transparent">
+              <Repeat className="h-4 w-4 mr-1" />
+              Rotate
+            </Button>
+          </CardHeader>
+          <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <div className="md:col-span-2">
+              <h3 className="text-lg md:text-xl font-semibold text-white">{current.title}</h3>
+              <p className="mt-1 text-white/80">{current.detail}</p>
+              <div className="mt-4">
+                <Button asChild variant="link" className="p-0 text-[#8bd5ff]">
+                  <Link href="/under-construction" className="inline-flex items-center">
+                    Read More Insights <ArrowRight className="h-4 w-4 ml-1" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+            <div className="rounded-lg ring-1 ring-white/10 overflow-hidden">
+              <img
+                src="/agriculture-health-automation.png"
+                alt="Mini case study visual"
+                className="w-full h-auto"
+              />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+  )
+}
+
+// components/offerings-grid.tsx
+"use client"
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Bot, GraduationCap, FlaskConical } from 'lucide-react'
+import { useRegistration } from "./registration-provider"
+
+const items = [
+  {
+    icon: Bot,
+    title: "AI Automation",
+    desc: "Streamline workflows for NGOs, enterprises, and government.",
+    cta: "Automate Your Processes",
+    interest: "Automation" as const,
+    color: "#8bd5ff",
+  },
+  {
+    icon: GraduationCap,
+    title: "AI Academy",
+    desc: "Job-ready AI training for Ethiopian professionals.",
+    cta: "Join the Next Cohort",
+    interest: "Academy" as const,
+    color: "#10B981",
+  },
+  {
+    icon: FlaskConical,
+    title: "Research & Impact",
+    desc: "Local AI solutions for agriculture, health, and education.",
+    cta: "Partner With Us",
+    interest: "Partnership" as const,
+    color: "#a7f3d0",
+  },
+]
+
+export function OfferingsGrid() {
+  const { openDialog } = useRegistration()
+
+  return (
+    <section className="py-12 md:py-16 bg-gradient-to-b from-[#073b54] to-[#032d42]">
+      <div className="container mx-auto px-4">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold text-white">Core Offerings</h2>
+          <p className="mt-3 text-white/80">Solutions that compound value across sectors.</p>
+        </div>
+        <div className="mt-8 grid md:grid-cols-3 gap-6">
+          {items.map((it, i) => (
+            <Card key={i} className="border-white/10 bg-white/5 backdrop-blur-sm h-full">
+              <CardHeader>
+                <div
+                  className="h-10 w-10 rounded-md flex items-center justify-center"
+                  style={{ backgroundColor: `${it.color}26` }}
+                  aria-hidden
+                >
+                  <it.icon className="h-5 w-5" style={{ color: it.color }} />
+                </div>
+                <CardTitle className="mt-2 text-white">{it.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-white/80">{it.desc}</p>
+                <div className="mt-4">
+                  <Button
+                    onClick={() => openDialog({ interest: it.interest })}
+                    className="bg-white/10 hover:bg-white/20 text-white"
+                  >
+                    {it.cta}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// components/social-proof.tsx
+import Image from "next/image"
+import { Card, CardContent } from "@/components/ui/card"
+import { Quote } from 'lucide-react'
+import { Badge } from "@/components/ui/badge"
+
+const testimonials = [
+  {
+    quote:
+      "Envest accelerated our digital transformation with practical automations and upskilling.",
+    author: "Program Director, USAID Partner",
+  },
+  {
+    quote:
+      "Their AI Academy produced job-ready talent we now rely on for data projects.",
+    author: "Faculty Lead, Addis Ababa University",
+  },
+]
+
+const logos = [
+  { alt: "GIZ", width: 100, height: 28, query: "GIZ logo minimal gray" },
+  { alt: "UNDP", width: 100, height: 28, query: "UNDP logo minimal gray" },
+  { alt: "USAID", width: 120, height: 28, query: "USAID logo minimal gray" },
+  { alt: "AAU", width: 100, height: 28, query: "Addis Ababa University crest minimal gray" },
+]
+
+export function SocialProof() {
+  return (
+    <section className="py-12 md:py-16 bg-[#032d42]">
+      <div className="container mx-auto px-4">
+        <div className="grid lg:grid-cols-3 gap-8 items-start">
+          <div className="lg:col-span-2">
+            <h2 className="text-2xl md:text-3xl font-semibold text-white">Trusted by Partners</h2>
+            <div className="mt-4 grid sm:grid-cols-2 gap-4">
+              {testimonials.map((t, i) => (
+                <Card key={i} className="border-white/10 bg-white/5 backdrop-blur-sm">
+                  <CardContent className="p-5">
+                    <Quote className="h-5 w-5 text-[#10B981]" aria-hidden />
+                    <p className="mt-3 text-white/90">{t.quote}</p>
+                    <p className="mt-3 text-sm text-white/70">— {t.author}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          <div className="lg:col-span-1">
+            <h3 className="text-lg font-semibold text-white">Partners</h3>
+            <div className="mt-4 grid grid-cols-2 gap-4">
+              {logos.map((l, i) => (
+                <div key={i} className="flex items-center justify-center rounded-md border border-white/10 p-3 bg-white/5">
+                  <Image
+                    src={`/generic-placeholder-icon.png?height=${l.height}&width=${l.width}&query=${encodeURIComponent(
+                      l.query
+                    )}`}
+                    alt={`${l.alt} logo`}
+                    width={l.width}
+                    height={l.height}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <h3 className="mt-8 text-lg font-semibold text-white">SDG Alignment</h3>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Badge className="bg-white/10 text-white hover:bg-white/20">SDG 4: Quality Education</Badge>
+              <Badge className="bg-[#10B981] text-white hover:bg-[#059669]">SDG 8: Decent Work</Badge>
+              <Badge className="bg-[#0EA5E9] text-white hover:bg-[#0284C7]">SDG 9: Industry & Innovation</Badge>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 text-center">
+          <p className="text-xl font-semibold text-white">
+            {"Ethiopia’s AI future starts here. Let’s build it together."}
+          </p>
+        </div>
+      </div >
+    </section >
+  )
+}
+
+// components/site-footer.tsx
+"use client"
+
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { useRegistration } from "./registration-provider"
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/under-construction", label: "About" },
+  { href: "/under-construction", label: "AI Automation" },
+  { href: "/under-construction", label: "AI Academy" },
+  { href: "/under-construction", label: "Insights" },
+  { href: "/under-construction", label: "Contact" },
+]
+
+export function SiteFooter() {
+  const { openDialog } = useRegistration()
+
+  return (
+    <footer className="border-t border-white/10 bg-[#021e2d]">
+      <div className="container mx-auto px-4 py-10">
+        <div className="grid md:grid-cols-3 gap-8">
+          <div>
+            <h4 className="font-semibold text-white">Envest Technologies</h4>
+            <p className="mt-2 text-sm text-white/80">Driving development with applied AI and automation.</p>
+            <div className="mt-4 text-sm text-white/80">
+              <p>Email: hello@envest.tech</p>
+              <p>Phone: +251 11 000 0000</p>
+              <p>
+                LinkedIn:{" "}
+                <a className="text-[#8bd5ff] underline-offset-4 hover:underline" href="https://www.linkedin.com" target="_blank" rel="noreferrer">
+                  linkedin.com/company/envest
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-white">Quick Links</h4>
+            <ul className="mt-3 grid grid-cols-2 gap-2">
+              {links.map((l) => (
+                <li key={l.label}>
+                  <Link href={l.href} className="text-sm text-white/80 hover:text-white">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-white">Newsletter</h4>
+            <p className="mt-2 text-sm text-white/80">Get updates on AI in Ethiopia.</p>
+            <div className="mt-3">
+              <Button
+                onClick={() => openDialog({ interest: "General" })}
+                className="bg-[#10B981] hover:bg-[#059669]"
+              >
+                Subscribe / Register Interest
+              </Button>
+              <p className="text-xs text-white/60 mt-2">Opens a quick registration form.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 text-xs text-white/60">© {new Date().getFullYear()} Envest Technologies. All rights reserved.</div>
+      </div>
+    </footer>
+  )
+}
+
+// components/mobile-sticky-cta.tsx
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { MessageSquare } from 'lucide-react'
+import { useState } from "react"
+import { ChatDrawer } from "@/components/chat-drawer"
+import { useRegistration } from "./registration-provider"
+
+export function MobileStickyCTA() {
+  const [openChat, setOpenChat] = useState(false)
+  const { openDialog } = useRegistration()
+
+  return (
+    <>
+      <div className="fixed inset-x-0 bottom-0 z-50 md:hidden border-t border-white/10 bg-[#021e2d] p-3">
+        <div className="container mx-auto flex items-center gap-2">
+          <Button className="flex-1 bg-[#10B981] hover:bg-[#059669]" onClick={() => openDialog({ interest: "General" })}>
+            Get Started
+          </Button>
+          <Button
+            variant="outline"
+            className="flex-1 border-white/20 text-white hover:bg-white/10 bg-transparent"
+            onClick={() => setOpenChat(true)}
+          >
+            <MessageSquare className="h-4 w-4 mr-1" />
+            Chat with our AI team
+          </Button>
+        </div>
+      </div>
+      <ChatDrawer open={openChat} onOpenChange={setOpenChat} />
+    </>
+  )
+}
+
+// app/under-construction/page.tsx
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Hammer } from 'lucide-react'
+
+export default function UnderConstructionPage() {
+  return (
+    <div className="min-h-[70vh] flex items-center justify-center px-4">
+      <div className="max-w-xl text-center">
+        <div className="mx-auto mb-6 size-16 rounded-full bg-white/10 flex items-center justify-center">
+          <Hammer className="size-8 text-white" />
+        </div>
+        <h1 className="text-3xl font-bold text-white">This page is under construction</h1>
+        <p className="mt-3 text-white/80">
+          We’re building something impactful here. In the meantime, head back home or register your interest from the landing page.
+        </p>
+        <div className="mt-6 flex items-center justify-center gap-3">
+          <Button asChild className="bg-white/10 hover:bg-white/20 text-white">
+            <Link href="/">Back to Home</Link>
+          </Button>
+          <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 bg-transparent">
+            <Link href="/">Register Interest</Link>
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// components/chat-drawer.tsx
+"use client"
+
+import { useState } from "react"
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+
+type ChatDrawerProps = {
+  open?: boolean
+  onOpenChange?: (v: boolean) => void
+}
+
+export function ChatDrawer({ open = false, onOpenChange = () => { } }: ChatDrawerProps) {
+  const [messages, setMessages] = useState<{ role: "user" | "assistant"; text: string }[]>([
+    { role: "assistant", text: "Hi! How can our AI team help you today?" },
+  ])
+  const [input, setInput] = useState("")
+
+  return (
+    <Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetContent side="bottom" className="h-[75vh] p-0 bg-[#032d42] text-white border-t border-white/10">
+        <SheetHeader className="p-4 border-b border-white/10">
+          <SheetTitle>Chat with our AI team</SheetTitle>
+        </SheetHeader>
+        <div className="flex flex-col h-[calc(75vh-8rem)]">
+          <div className="flex-1 overflow-auto p-4 space-y-3">
+            {messages.map((m, i) => (
+              <div
+                key={i}
+                className={
+                  m.role === "user"
+                    ? "ml-auto max-w-[80%] rounded-lg bg-[#10B981] text-white px-3 py-2"
+                    : "mr-auto max-w-[80%] rounded-lg bg-white/10 px-3 py-2"
+                }
+              >
+                {m.text}
+              </div>
+            ))}
+          </div>
+          <form
+            className="p-3 border-t border-white/10 flex gap-2"
+            onSubmit={(e) => {
+              e.preventDefault()
+              const text = input.trim()
+              if (!text) return
+              setMessages((prev) => [...prev, { role: "user", text }])
+              setInput("")
+              setTimeout(() => {
+                setMessages((prev) => [
+                  ...prev,
+                  {
+                    role: "assistant",
+                    text:
+                      "Thanks! A specialist will reach out shortly. For urgent inquiries, email hello@envest.tech.",
+                  },
+                ])
+              }, 500)
+            }}
+          >
+            <Input
+              placeholder="Ask about automation, training, or partnerships..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              aria-label="Message"
+              className="bg-white/5 border-white/10 text-white placeholder:text-white/50"
+            />
+            <Button type="submit" className="bg-[#10B981] hover:bg-[#059669]">
+              Send
+            </Button>
+          </form>
+        </div>
+      </SheetContent>
+    </Sheet>
+  )
+}
+
+// components/registration-dialog.tsx
+"use client"
+
+import { useEffect, useState } from "react"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import type { RegistrationPayload } from "./registration-provider"
+
+type Props = {
+  open?: boolean
+  onOpenChange?: (v: boolean) => void
+  preset?: Partial<RegistrationPayload>
+}
+
+export function RegistrationDialog({ open = false, onOpenChange = () => { }, preset }: Props) {
+  const [form, setForm] = useState<RegistrationPayload>({
+    name: "",
+    email: "",
+    interest: "General",
+    message: "",
+  })
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (preset) {
+      setForm((prev) => ({ ...prev, ...preset }))
+    }
+  }, [preset])
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+    setSuccess(null)
+    try {
+      const res = await fetch("/api/registrations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error("Failed to submit")
+      const data = await res.json()
+      const key = "envest:registrations"
+      const existing = JSON.parse(localStorage.getItem(key) || "[]")
+      existing.push({ id: data.id, ...form, createdAt: new Date().toISOString() })
+      localStorage.setItem(key, JSON.stringify(existing))
+      setSuccess("Thanks! Your registration was received. We'll be in touch shortly.")
+      setForm({ name: "", email: "", interest: "General", message: "" })
+    } catch (err) {
+      setError("Something went wrong. Please try again.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-lg bg-[#083a53] text-white border-white/10">
+        <DialogHeader>
+          <DialogTitle>Register your interest</DialogTitle>
+          <DialogDescription className="text-white/70">
+            Tell us how we can help—automation, academy enrollment, or partnerships.
+          </DialogDescription>
+        </DialogHeader>
+        <form onSubmit={onSubmit} className="space-y-3">
+          <div className="grid gap-2">
+            <Label htmlFor="name">Name</Label>
+            <Input
+              id="name"
+              required
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              className="bg-white/5 border-white/10 text-white placeholder:text-white/50"
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              required
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              className="bg-white/5 border-white/10 text-white placeholder:text-white/50"
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="interest">Area of interest</Label>
+            <select
+              id="interest"
+              className="h-10 rounded-md border bg-white/5 border-white/10 px-3 text-sm text-white"
+              value={form.interest}
+              onChange={(e) => setForm({ ...form, interest: e.target.value as RegistrationPayload["interest"] })}
+            >
+              <option className="bg-[#083a53]" value="Automation">Automation</option>
+              <option className="bg-[#083a53]" value="Academy">Academy</option>
+              <option className="bg-[#083a53]" value="Partnership">Partnership</option>
+              <option className="bg-[#083a53]" value="General">General</option>
+            </select>
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="message">Message</Label>
+            <Textarea
+              id="message"
+              placeholder="Briefly describe your goals..."
+              value={form.message}
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
+              className="bg-white/5 border-white/10 text-white placeholder:text-white/50"
+            />
+          </div>
+          {error && <p className="text-sm text-red-300">{error}</p>}
+          {success && <p className="text-sm text-green-300">{success}</p>}
+          <div className="pt-2 flex gap-2">
+            <Button type="submit" disabled={loading} className="bg-[#10B981] hover:bg-[#059669]">
+              {loading ? "Submitting..." : "Submit"}
+            </Button>
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="border-white/20 text-white hover:bg-white/10">
+              Cancel
+            </Button>
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
+  )
+}
