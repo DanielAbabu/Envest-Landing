@@ -1,56 +1,72 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useEffect, useState } from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import type { RegistrationPayload } from "./registration-provider"
-import { motion } from "framer-motion"
-import { CheckCircle, AlertCircle, Send } from "lucide-react"
+import { useEffect, useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import type { RegistrationPayload } from "./registration-provider";
+import { motion } from "framer-motion";
+import { CheckCircle, AlertCircle, Send } from "lucide-react";
 
 type Props = {
-  open?: boolean
-  onOpenChange?: (v: boolean) => void
-  preset?: Partial<RegistrationPayload>
-}
+  open?: boolean;
+  onOpenChange?: (v: boolean) => void;
+  preset?: Partial<RegistrationPayload>;
+};
 
-export function RegistrationDialog({ open = false, onOpenChange = () => {}, preset }: Props) {
-  const [form, setForm] = useState<RegistrationPayload>({ name: "", email: "", interest: "General", message: "" })
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState<string | null>(null)
-  const [error, setError] = useState<string | null>(null)
+export function RegistrationDialog({
+  open = false,
+  onOpenChange = () => {},
+  preset,
+}: Props) {
+  const [form, setForm] = useState<RegistrationPayload>({
+    name: "",
+    email: "",
+    interest: "General",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (preset) setForm((prev) => ({ ...prev, ...preset }))
-  }, [preset])
+    if (preset) setForm((prev) => ({ ...prev, ...preset }));
+  }, [preset]);
 
   async function onSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setLoading(true)
-    setError(null)
-    setSuccess(null)
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+
     try {
-      const res = await fetch("/api/registrations", {
+      const res = await fetch("https://envestafrica.com/api/registrations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
-      })
-      if (!res.ok) throw new Error("Failed to submit")
-      const data = await res.json()
-      const key = "envest:registrations"
-      const existing = JSON.parse(localStorage.getItem(key) || "[]")
-      existing.push({ id: data.id, ...form, createdAt: new Date().toISOString() })
-      localStorage.setItem(key, JSON.stringify(existing))
-      setSuccess("Thanks! Your registration was received. We'll be in touch shortly.")
-      setForm({ name: "", email: "", interest: "General", message: "" })
-    } catch {
-      setError("Something went wrong. Please try again.")
+      });
+
+      if (!res.ok) throw new Error("Failed to submit");
+
+      setSuccess(
+        "Thanks! Your registration was received. We'll be in touch shortly."
+      );
+      setForm({ name: "", email: "", interest: "General", message: "" });
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong. Please try again.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -63,9 +79,12 @@ export function RegistrationDialog({ open = false, onOpenChange = () => {}, pres
           transition={{ duration: 0.3 }}
         >
           <DialogHeader className="text-center pb-6">
-            <DialogTitle className="text-2xl font-bold text-gray-900">Register your interest</DialogTitle>
+            <DialogTitle className="text-2xl font-bold text-gray-900">
+              Register your interest
+            </DialogTitle>
             <DialogDescription className="text-gray-600 text-base">
-              Tell us how we can help—automation, academy enrollment, or partnerships.
+              Tell us how we can help—automation, academy enrollment, or
+              partnerships.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={onSubmit} className="space-y-6">
@@ -119,7 +138,12 @@ export function RegistrationDialog({ open = false, onOpenChange = () => {}, pres
                 id="interest"
                 className="h-12 rounded-md px-4 text-sm bg-white border border-gray-300 text-gray-900 focus:border-[#1DA37A] focus:ring-[#1DA37A] transition-colors duration-200"
                 value={form.interest}
-                onChange={(e) => setForm({ ...form, interest: e.target.value as RegistrationPayload["interest"] })}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    interest: e.target.value as RegistrationPayload["interest"],
+                  })
+                }
               >
                 <option value="Automation">Automation</option>
                 <option value="Academy">Academy</option>
@@ -212,5 +236,5 @@ export function RegistrationDialog({ open = false, onOpenChange = () => {}, pres
         </motion.div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
