@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Sparkles, ArrowRight } from "lucide-react";
-import { useRegistration } from "./registration-provider";
 import { motion } from "framer-motion";
+import { GraduationCap, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useRegistration } from "./registration-provider";
 import ShaderBackground from "./shader-background";
 
-export function Hero() {
+export function AcademyHero() {
   const { openDialog } = useRegistration();
 
   const containerVariants = {
@@ -47,9 +47,9 @@ export function Hero() {
               variants={itemVariants}
               className="flex items-center justify-center gap-3 mb-6"
             >
-              <Sparkles className="h-8 w-8 text-[#8bd5ff]" />
+              <GraduationCap className="h-8 w-8 text-[#8bd5ff]" />
               <p className="text-lg font-semibold tracking-wide uppercase text-[#8bd5ff]">
-                Envest Technologies
+                AI Academy
               </p>
             </motion.div>
 
@@ -58,7 +58,7 @@ export function Hero() {
               variants={itemVariants}
               className="text-4xl md:text-5xl lg:text-5xl font-bold leading-tight mb-6 text-[#EEFCF7]"
             >
-              Transforming Enterprises through Applied AI and Automation
+              Master AI Skills for Ethiopia's Future
             </motion.h1>
 
             {/* Subtitle */}
@@ -66,28 +66,28 @@ export function Hero() {
               variants={itemVariants}
               className="text-lg md:text-lg text-[#9d9d9d] leading-relaxed mb-10 max-w-3xl mx-auto"
             >
-              AI systems and skill-building solutions designed to streamline
-              work and scale impact across Ethiopia's key sectors.
+              Practical, job-ready AI training designed for Ethiopia's
+              development professionals, entrepreneurs, and students.
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons*/}
             <motion.div
               variants={itemVariants}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <Button
                 size="lg"
-                onClick={() => openDialog({ interest: "Automation" })}
+                onClick={() => openDialog({ interest: "Academy" })}
                 className="bg-[#0C4531] hover:bg-[#] text-[#EEFCF7] font-semibold px-8 py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                Explore AI Automation
+                Join the Academy
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Button>
               <button
                 onClick={() => openDialog({ interest: "Academy" })}
                 className="text-lg font-semibold text-[#0F573E] hover:text-white transition-all duration-300 underline-offset-4 hover:underline"
               >
-                Join the AI Academy
+                Explore Programs
               </button>
             </motion.div>
           </motion.div>

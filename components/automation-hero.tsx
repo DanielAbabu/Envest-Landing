@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Sparkles, ArrowRight } from "lucide-react";
-import { useRegistration } from "./registration-provider";
 import { motion } from "framer-motion";
+import { Bot, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useRegistration } from "./registration-provider";
 import ShaderBackground from "./shader-background";
 
-export function Hero() {
+export function AutomationHero() {
   const { openDialog } = useRegistration();
 
   const containerVariants = {
@@ -47,9 +47,9 @@ export function Hero() {
               variants={itemVariants}
               className="flex items-center justify-center gap-3 mb-6"
             >
-              <Sparkles className="h-8 w-8 text-[#8bd5ff]" />
+              <Bot className="h-8 w-8 text-[#8bd5ff]" />
               <p className="text-lg font-semibold tracking-wide uppercase text-[#8bd5ff]">
-                Envest Technologies
+                AI Automation Solutions
               </p>
             </motion.div>
 
@@ -58,7 +58,7 @@ export function Hero() {
               variants={itemVariants}
               className="text-4xl md:text-5xl lg:text-5xl font-bold leading-tight mb-6 text-[#EEFCF7]"
             >
-              Transforming Enterprises through Applied AI and Automation
+              Transform Your Operations with AI
             </motion.h1>
 
             {/* Subtitle */}
@@ -66,8 +66,9 @@ export function Hero() {
               variants={itemVariants}
               className="text-lg md:text-lg text-[#9d9d9d] leading-relaxed mb-10 max-w-3xl mx-auto"
             >
-              AI systems and skill-building solutions designed to streamline
-              work and scale impact across Ethiopia's key sectors.
+              We design and deploy intelligent automation systems that simplify
+              complex workflows, reduce manual effort, and free up your teams to
+              focus on what matters most.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -80,14 +81,14 @@ export function Hero() {
                 onClick={() => openDialog({ interest: "Automation" })}
                 className="bg-[#0C4531] hover:bg-[#] text-[#EEFCF7] font-semibold px-8 py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                Explore AI Automation
+                Start Your Automation Journey
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Button>
               <button
-                onClick={() => openDialog({ interest: "Academy" })}
-                className="text-lg font-semibold text-[#0F573E] hover:text-white transition-all duration-300 underline-offset-4 hover:underline"
+                onClick={() => openDialog({ interest: "Automation" })}
+                className="text-lg font-semibold text-[#8bd5ff] hover:text-white transition-all duration-300 underline-offset-4 hover:underline"
               >
-                Join the AI Academy
+                See Our Impact Stories
               </button>
             </motion.div>
           </motion.div>

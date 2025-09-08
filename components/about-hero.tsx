@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Sparkles, ArrowRight } from "lucide-react";
-import { useRegistration } from "./registration-provider";
 import { motion } from "framer-motion";
+import { Sparkles, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useRegistration } from "./registration-provider";
 import ShaderBackground from "./shader-background";
 
-export function Hero() {
+export function AboutHero() {
   const { openDialog } = useRegistration();
 
   const containerVariants = {
@@ -49,7 +49,7 @@ export function Hero() {
             >
               <Sparkles className="h-8 w-8 text-[#8bd5ff]" />
               <p className="text-lg font-semibold tracking-wide uppercase text-[#8bd5ff]">
-                Envest Technologies
+                About Envest Technologies
               </p>
             </motion.div>
 
@@ -58,7 +58,7 @@ export function Hero() {
               variants={itemVariants}
               className="text-4xl md:text-5xl lg:text-5xl font-bold leading-tight mb-6 text-[#EEFCF7]"
             >
-              Transforming Enterprises through Applied AI and Automation
+              Who We Are
             </motion.h1>
 
             {/* Subtitle */}
@@ -66,8 +66,10 @@ export function Hero() {
               variants={itemVariants}
               className="text-lg md:text-lg text-[#9d9d9d] leading-relaxed mb-10 max-w-3xl mx-auto"
             >
-              AI systems and skill-building solutions designed to streamline
-              work and scale impact across Ethiopia's key sectors.
+              Envest is an AI automation, education, and consulting firm
+              committed to creating meaningful impact through technology. Based
+              in Ethiopia, we combine deep local insights with global best
+              practices.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -77,17 +79,17 @@ export function Hero() {
             >
               <Button
                 size="lg"
-                onClick={() => openDialog({ interest: "Automation" })}
+                onClick={() => openDialog({ interest: "General" })}
                 className="bg-[#0C4531] hover:bg-[#] text-[#EEFCF7] font-semibold px-8 py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                Explore AI Automation
+                Get Started
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Button>
               <button
-                onClick={() => openDialog({ interest: "Academy" })}
+                onClick={() => openDialog({ interest: "Partnership" })}
                 className="text-lg font-semibold text-[#0F573E] hover:text-white transition-all duration-300 underline-offset-4 hover:underline"
               >
-                Join the AI Academy
+                Partner With Us
               </button>
             </motion.div>
           </motion.div>

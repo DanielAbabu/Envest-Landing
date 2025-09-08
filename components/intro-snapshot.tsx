@@ -118,7 +118,7 @@ export function IntroSnapshot() {
   }
 
   return (
-    <section className="py-20 md:py-28 bg-white relative overflow-hidden">
+    <section className="py-24 md:py-32 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           className="mx-auto max-w-4xl text-center mb-20"
@@ -127,13 +127,13 @@ export function IntroSnapshot() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <Badge className="bg-gray-100 text-gray-700 border-gray-200 mb-6 px-6 py-3 text-sm font-semibold">
+          <Badge className="bg-gray-100 text-gray-700 border-gray-200 mb-6 px-6 py-3 text-lg font-semibold">
             Company Snapshot
           </Badge>
-          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">{"Innovating for Ethiopia's Future"}</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">{"Innovating for Ethiopia's Future"}</h2>
           <p className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
             {
-              "Envest Technologies is an innovative AI automation and education company. We design intelligent systems for development and enterprise, run AI training programs to close the skills gap, and research local AI solutions for agriculture, health, and more."
+              "Envest Technologies is an innovative AI automation and education company. We design intelligent systems for development and enterprise, run AI training programs to close the skills gap, and research local AI solutions for young professional training, work management, health, and more."
             }
           </p>
         </motion.div>
@@ -151,8 +151,8 @@ export function IntroSnapshot() {
                 <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden">
                   <div className="relative z-10">
                     <div className="relative mb-6">
-                      <div className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${s.gradient} p-0.5 mx-auto`}>
-                        <div className="h-full w-full bg-white rounded-2xl flex items-center justify-center">
+                      <div className={`h-16 w-16 rounded-xl bg-gradient-to-br ${s.gradient} p-0.5 mx-auto`}>
+                        <div className="h-full w-full bg-white rounded-xl flex items-center justify-center">
                           <s.icon className="h-8 w-8 text-gray-700" />
                         </div>
                       </div>
@@ -163,15 +163,15 @@ export function IntroSnapshot() {
                         <div className="text-4xl md:text-5xl font-bold text-gray-900">
                           <AnimatedCounter target={s.value} suffix={s.suffix} duration={1500 + i * 200} />
                         </div>
-                        <div className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-4">
+                        <div className="text-lg font-semibold text-gray-600 uppercase tracking-wide mb-6">
                           {s.label}
                         </div>
                         <div className="space-y-3">
-                          <div className="grid grid-cols-2 gap-2">
+                          <div className="grid grid-cols-2 gap-3">
                             {s.sectors?.map((sector, idx) => (
                               <motion.div
                                 key={sector}
-                                className="text-xs px-3 py-2 bg-gray-100 text-gray-700 rounded-full font-medium border border-gray-200"
+                                className="text-sm px-3 py-2 bg-gray-100 text-gray-700 rounded-full font-medium border border-gray-200"
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
@@ -188,9 +188,9 @@ export function IntroSnapshot() {
                         <div className="text-4xl md:text-5xl font-bold text-gray-900">
                           <AnimatedCounter target={s.value} suffix={s.suffix} duration={2000 + i * 300} />
                         </div>
-                        <div className="text-sm font-semibold text-gray-600 uppercase tracking-wide">{s.label}</div>
+                        <div className="text-lg font-semibold text-gray-600 uppercase tracking-wide">{s.label}</div>
                         <motion.div
-                          className="w-full h-1 bg-gray-100 rounded-full overflow-hidden"
+                          className="w-full h-2 bg-gray-100 rounded-full overflow-hidden"
                           initial={{ opacity: 0 }}
                           whileInView={{ opacity: 1 }}
                           viewport={{ once: true }}

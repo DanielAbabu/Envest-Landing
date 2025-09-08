@@ -50,11 +50,14 @@ export function RegistrationDialog({
     setSuccess(null);
 
     try {
-      const res = await fetch("https://envestafrica.com/api/registrations", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      const res = await fetch(
+        "https://envest-backend-cdli.onrender.com/api/registrations",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        }
+      );
 
       if (!res.ok) throw new Error("Failed to submit");
 
@@ -69,7 +72,6 @@ export function RegistrationDialog({
       setLoading(false);
     }
   }
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg bg-white border-gray-200 shadow-2xl">
