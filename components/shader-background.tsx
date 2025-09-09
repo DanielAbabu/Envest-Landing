@@ -79,21 +79,13 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
       <MeshGradient
         className="absolute inset-0 w-full h-full"
         colors={["#000000", "#06231A", "#1DA37A", "#06231A", "#000000"]}
-        speed={0.8}
+        speed={0.6}
         backgroundColor="transparent"
       />
       <MeshGradient
         className="absolute inset-0 w-full h-full opacity-60"
         colors={["#000000", "#06231A", "#1DA37A", "#06231A", "#000000"]}
-        speed={0.5}
-        wireframe="true"
-        backgroundColor="transparent"
-      />
-      <MeshGradient
-        className="absolute inset-0 w-full h-full opacity-60"
-        colors={["#000000", "#036648", "#06231A", "#000000"]}
-        speed={0.7}
-        wireframe="true"
+        speed={0.4}
         backgroundColor="transparent"
       />
 

@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { Badge } from "@/components/ui/badge"
-import { Cpu, GraduationCap, Handshake, MapPin } from "lucide-react"
-import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
+import { Badge } from "@/components/ui/badge";
+import { Cpu, GraduationCap, Handshake, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const stats = [
   {
     icon: Cpu,
     label: "Workflows automated",
-    value: 50,
+    value: 12,
     suffix: "+",
     color: "#1DA37A",
     gradient: "from-[#1DA37A] to-[#22C55E]",
@@ -17,7 +17,7 @@ const stats = [
   {
     icon: GraduationCap,
     label: "Professionals trained",
-    value: 1000,
+    value: 24,
     suffix: "+",
     color: "#1DA37A",
     gradient: "from-[#1DA37A] to-[#059669]",
@@ -25,7 +25,7 @@ const stats = [
   {
     icon: Handshake,
     label: "Partners & clients",
-    value: 10,
+    value: 6,
     suffix: "+",
     color: "#8bd5ff",
     gradient: "from-[#8bd5ff] to-[#0EA5E9]",
@@ -40,44 +40,48 @@ const stats = [
     isSpecial: true,
     sectors: ["Agriculture", "Healthcare", "Education", "Public Services"],
   },
-]
+];
 
 function AnimatedCounter({
   target,
   suffix = "",
   duration = 2000,
-}: { target: number; suffix?: string; duration?: number }) {
-  const [count, setCount] = useState(0)
-  const [hasStarted, setHasStarted] = useState(false)
+}: {
+  target: number;
+  suffix?: string;
+  duration?: number;
+}) {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
-    if (!hasStarted) return
+    if (!hasStarted) return;
 
-    let startTime: number
-    let animationFrame: number
+    let startTime: number;
+    let animationFrame: number;
 
     const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime
-      const progress = Math.min((currentTime - startTime) / duration, 1)
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
 
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4)
-      const currentCount = Math.floor(easeOutQuart * target)
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentCount = Math.floor(easeOutQuart * target);
 
-      setCount(currentCount)
+      setCount(currentCount);
 
       if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate)
+        animationFrame = requestAnimationFrame(animate);
       }
-    }
+    };
 
-    animationFrame = requestAnimationFrame(animate)
+    animationFrame = requestAnimationFrame(animate);
 
     return () => {
       if (animationFrame) {
-        cancelAnimationFrame(animationFrame)
+        cancelAnimationFrame(animationFrame);
       }
-    }
-  }, [target, duration, hasStarted])
+    };
+  }, [target, duration, hasStarted]);
 
   return (
     <motion.span
@@ -90,7 +94,7 @@ function AnimatedCounter({
       {count}
       {suffix}
     </motion.span>
-  )
+  );
 }
 
 export function IntroSnapshot() {
@@ -103,7 +107,7 @@ export function IntroSnapshot() {
         delayChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -115,7 +119,7 @@ export function IntroSnapshot() {
         ease: "easeOut",
       },
     },
-  }
+  };
 
   return (
     <section className="py-24 md:py-32 bg-white relative overflow-hidden">
@@ -130,8 +134,10 @@ export function IntroSnapshot() {
           <Badge className="bg-gray-100 text-gray-700 border-gray-200 mb-6 px-6 py-3 text-lg font-semibold">
             Company Snapshot
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">{"Innovating for Ethiopia's Future"}</h2>
-          <p className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+            {"Innovating for Ethiopia's Future"}
+          </h2>
+          <p className="text-lg md:text-lg text-gray-600 leading-relaxed max-w-screen-xl mx-auto">
             {
               "Envest Technologies is an innovative AI automation and education company. We design intelligent systems for development and enterprise, run AI training programs to close the skills gap, and research local AI solutions for young professional training, work management, health, and more."
             }
@@ -151,7 +157,9 @@ export function IntroSnapshot() {
                 <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden">
                   <div className="relative z-10">
                     <div className="relative mb-6">
-                      <div className={`h-16 w-16 rounded-xl bg-gradient-to-br ${s.gradient} p-0.5 mx-auto`}>
+                      <div
+                        className={`h-16 w-16 rounded-xl bg-gradient-to-br ${s.gradient} p-0.5 mx-auto`}
+                      >
                         <div className="h-full w-full bg-white rounded-xl flex items-center justify-center">
                           <s.icon className="h-8 w-8 text-gray-700" />
                         </div>
@@ -161,7 +169,11 @@ export function IntroSnapshot() {
                     {s.isSpecial ? (
                       <div className="text-center space-y-4">
                         <div className="text-4xl md:text-5xl font-bold text-gray-900">
-                          <AnimatedCounter target={s.value} suffix={s.suffix} duration={1500 + i * 200} />
+                          <AnimatedCounter
+                            target={s.value}
+                            suffix={s.suffix}
+                            duration={1500 + i * 200}
+                          />
                         </div>
                         <div className="text-lg font-semibold text-gray-600 uppercase tracking-wide mb-6">
                           {s.label}
@@ -175,7 +187,10 @@ export function IntroSnapshot() {
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: 0.6 + idx * 0.1 }}
+                                transition={{
+                                  duration: 0.4,
+                                  delay: 0.6 + idx * 0.1,
+                                }}
                               >
                                 {sector}
                               </motion.div>
@@ -186,9 +201,15 @@ export function IntroSnapshot() {
                     ) : (
                       <div className="text-center space-y-3">
                         <div className="text-4xl md:text-5xl font-bold text-gray-900">
-                          <AnimatedCounter target={s.value} suffix={s.suffix} duration={2000 + i * 300} />
+                          <AnimatedCounter
+                            target={s.value}
+                            suffix={s.suffix}
+                            duration={2000 + i * 300}
+                          />
                         </div>
-                        <div className="text-lg font-semibold text-gray-600 uppercase tracking-wide">{s.label}</div>
+                        <div className="text-lg font-semibold text-gray-600 uppercase tracking-wide">
+                          {s.label}
+                        </div>
                         <motion.div
                           className="w-full h-2 bg-gray-100 rounded-full overflow-hidden"
                           initial={{ opacity: 0 }}
@@ -201,7 +222,11 @@ export function IntroSnapshot() {
                             initial={{ width: 0 }}
                             whileInView={{ width: "100%" }}
                             viewport={{ once: true }}
-                            transition={{ duration: 1.5, delay: 1 + i * 0.1, ease: "easeOut" }}
+                            transition={{
+                              duration: 1.5,
+                              delay: 1 + i * 0.1,
+                              ease: "easeOut",
+                            }}
                           />
                         </motion.div>
                       </div>
@@ -214,5 +239,5 @@ export function IntroSnapshot() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

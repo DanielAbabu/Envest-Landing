@@ -111,10 +111,10 @@ export function FeaturedInsight() {
           <Badge className="bg-white text-gray-700 border-gray-200 shadow-sm mb-6 px-6 py-3 text-lg font-medium">
             Recent Impact
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
             Recent Impact Stories
           </h2>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Real automation projects delivering measurable results across
             Ethiopia's key sectors.
           </p>
@@ -143,16 +143,16 @@ export function FeaturedInsight() {
                   {/* Card Content */}
                   <div className="grid lg:grid-cols-5 gap-0">
                     {/* Left Content - Takes 3/5 of the width */}
-                    <div className="lg:col-span-3 p-12 md:p-20 flex flex-col justify-center">
+                    <div className="lg:col-span-3 p-8 md:p-12 flex flex-col justify-center">
                       {/* Header Info */}
                       <motion.div
-                        className="flex items-center gap-6 mb-10"
+                        className="flex items-center gap-8 mb-10"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.1 }}
                       >
                         <Badge
-                          className="text-white border-0 px-6 py-3 text-lg font-semibold rounded-xl"
+                          className="text-white border-0 px-12 py-3 text-lg font-semibold rounded-xl"
                           style={{ backgroundColor: currentStory.color }}
                         >
                           {currentStory.category}
@@ -173,7 +173,7 @@ export function FeaturedInsight() {
 
                       {/* Title */}
                       <motion.h3
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 leading-tight"
+                        className="text-4xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-8 mb-8 leading-tight"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.2 }}
@@ -183,7 +183,7 @@ export function FeaturedInsight() {
 
                       {/* Description */}
                       <motion.p
-                        className="text-xl text-gray-600 mb-12 leading-relaxed max-w-3xl"
+                        className="text-xl text-gray-600 mb-18 leading-relaxed max-w-3xl"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.3 }}
@@ -199,16 +199,16 @@ export function FeaturedInsight() {
                         transition={{ duration: 0.4, delay: 0.4 }}
                       >
                         {/* Enhanced Impact Display */}
-                        <div className="flex items-center gap-6 bg-gray-50 rounded-2xl px-8 py-6 border border-gray-100">
+                        <div className="flex items-center gap-12 ">
                           <div
-                            className="w-5 h-5 rounded-full shadow-sm"
+                            className="w-4 h-4 rounded-full shadow-sm"
                             style={{ backgroundColor: currentStory.color }}
                           />
                           <div>
-                            <span className="text-lg text-gray-500 font-medium">
+                            <span className="text-lg text-gray-600 font-medium">
                               Key Impact
                             </span>
-                            <div className="font-bold text-gray-900 text-xl">
+                            <div className="font-bold text-gray-900 text-lg">
                               {currentStory.impact}
                             </div>
                           </div>
@@ -217,11 +217,11 @@ export function FeaturedInsight() {
                         {/* Enhanced CTA Button */}
                         <Button
                           asChild
-                          className="bg-[#1DA37A] hover:bg-[#158A5A] text-white font-semibold px-10 py-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-lg"
+                          className="bg-[#1DA37A] hover:bg-[#158A5A] text-white font-semibold px-24 py-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 text-sm"
                         >
                           <Link
                             href="/under-construction"
-                            className="inline-flex items-center gap-3"
+                            className="inline-flex items-center gap-5"
                           >
                             Read Full Story
                             <ArrowRight className="h-6 w-6" />

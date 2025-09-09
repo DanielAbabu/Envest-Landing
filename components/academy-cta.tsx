@@ -45,7 +45,7 @@ export function AcademyCTA() {
                   size="lg"
                   variant="outline"
                   onClick={() => openDialog({ interest: "Academy" })}
-                  className="border-white text-white hover:bg-white/10 font-semibold px-8 py-4 text-lg"
+                  className="text-[#1DA37A] font-semibold px-8 py-4 text-lg hover:underline"
                 >
                   Explore All Programs
                   <ArrowRight className="h-5 w-5 ml-2" />

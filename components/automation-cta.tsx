@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, MessageSquare } from "lucide-react"
-import { useRegistration } from "./registration-provider"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, MessageSquare } from "lucide-react";
+import { useRegistration } from "./registration-provider";
 
 export function AutomationCTA() {
-  const { openDialog } = useRegistration()
+  const { openDialog } = useRegistration();
 
   return (
     <section className="py-20 bg-white">
@@ -26,10 +26,13 @@ export function AutomationCTA() {
             </div>
 
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">Ready to Transform Your Operations?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
+                Ready to Transform Your Operations?
+              </h2>
               <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
-                Let's discuss how AI automation can streamline your workflows, reduce manual effort, and help your team
-                focus on what matters most.
+                Let's discuss how AI automation can streamline your workflows,
+                reduce manual effort, and help your team focus on what matters
+                most.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -45,7 +48,7 @@ export function AutomationCTA() {
                   size="lg"
                   variant="outline"
                   onClick={() => openDialog({ interest: "General" })}
-                  className="border-white text-white hover:bg-white/10 font-semibold px-8 py-4 text-lg"
+                  className="text-[#1DA37A] font-semibold px-8 py-4 text-lg hover:underline"
                 >
                   Schedule a Consultation
                   <ArrowRight className="h-5 w-5 ml-2" />
@@ -53,12 +56,13 @@ export function AutomationCTA() {
               </div>
 
               <p className="text-sm text-white/70 mt-6">
-                Get in touch to explore how we can help automate your specific workflows and challenges.
+                Get in touch to explore how we can help automate your specific
+                workflows and challenges.
               </p>
             </div>
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

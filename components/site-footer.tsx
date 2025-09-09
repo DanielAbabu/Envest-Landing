@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { useRegistration } from "./registration-provider"
-import { motion } from "framer-motion"
-import { ArrowRight, Mail, Phone, Linkedin } from "lucide-react"
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { useRegistration } from "./registration-provider";
+import { motion } from "framer-motion";
+import { ArrowRight, Mail, Phone, Linkedin } from "lucide-react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -14,10 +14,10 @@ const links = [
   { href: "/under-construction", label: "AI Academy" },
   { href: "/under-construction", label: "Insights" },
   { href: "/under-construction", label: "Contact" },
-]
+];
 
 export function SiteFooter() {
-  const { openDialog } = useRegistration()
+  const { openDialog } = useRegistration();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -28,7 +28,7 @@ export function SiteFooter() {
         delayChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -40,7 +40,7 @@ export function SiteFooter() {
         ease: "easeOut",
       },
     },
-  }
+  };
 
   return (
     <footer className="border-t border-gray-200 bg-gradient-to-br from-white to-gray-50 relative overflow-hidden">
@@ -73,17 +73,20 @@ export function SiteFooter() {
               />
             </motion.div>
             <p className="text-gray-600 mb-8 leading-relaxed">
-              Driving development with applied AI and automation across Ethiopia's key sectors.
+              Driving development with applied AI and automation across
+              Ethiopia's key sectors.
             </p>
             <div className="space-y-4">
-              <p className="font-semibold text-gray-900 mb-4">Contact Information</p>
+              <p className="font-semibold text-gray-900 mb-4">
+                Contact Information
+              </p>
               <motion.div
                 className="flex items-center gap-3 text-gray-600 hover:text-gray-900 transition-colors duration-200 group"
                 whileHover={{ x: 5 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <Mail className="h-4 w-4 text-[#1DA37A] group-hover:scale-110 transition-transform duration-200" />
-                <span>hello@envest.tech</span>
+                <span>contact@envestafrica.com</span>
               </motion.div>
               <motion.div
                 className="flex items-center gap-3 text-gray-600 hover:text-gray-900 transition-colors duration-200 group"
@@ -101,11 +104,11 @@ export function SiteFooter() {
                 <Linkedin className="h-4 w-4 text-[#1DA37A] group-hover:scale-110 transition-transform duration-200" />
                 <a
                   className="text-[#1DA37A] hover:text-[#158A5A] font-medium transition-colors duration-200"
-                  href="https://www.linkedin.com"
+                  href="https://www.linkedin.com/company/envestafrica"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  linkedin.com/company/envest
+                  linkedin.com/company/envestafrica
                 </a>
               </motion.div>
             </div>
@@ -138,7 +141,8 @@ export function SiteFooter() {
           <motion.div variants={itemVariants}>
             <h4 className="font-bold text-gray-900 mb-6">Stay Updated</h4>
             <p className="text-gray-600 mb-8 leading-relaxed">
-              Get the latest updates on AI developments and opportunities in Ethiopia.
+              Get the latest updates on AI developments and opportunities in
+              Ethiopia.
             </p>
             <motion.div
               whileHover={{ scale: 1.02 }}
@@ -157,7 +161,8 @@ export function SiteFooter() {
               </Button>
             </motion.div>
             <p className="text-xs text-gray-500 leading-relaxed">
-              Opens a quick registration form to stay connected with our latest updates and opportunities.
+              Opens a quick registration form to stay connected with our latest
+              updates and opportunities.
             </p>
           </motion.div>
         </motion.div>
@@ -170,10 +175,11 @@ export function SiteFooter() {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <p className="text-sm text-gray-500">
-            © {new Date().getFullYear()} Envest Technologies. All rights reserved.
+            © {new Date().getFullYear()} Envest Technologies. All rights
+            reserved.
           </p>
         </motion.div>
       </div>
     </footer>
-  )
+  );
 }
