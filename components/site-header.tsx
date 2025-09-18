@@ -1,14 +1,20 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Menu } from "lucide-react"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { useRegistration } from "./registration-provider"
-import { useEffect, useState } from "react"
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Menu } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { useRegistration } from "./registration-provider";
+import { useEffect, useState } from "react";
 
 const nav = [
   { href: "/", label: "Home" },
@@ -16,66 +22,84 @@ const nav = [
   { href: "/academy", label: "AI Academy" },
   { href: "/under-construction", label: "Insights" },
   { href: "/about", label: "About" },
-]
+];
 
 export function SiteHeader({ className = "" }: { className?: string }) {
-  const pathname = usePathname()
-  const { openDialog } = useRegistration()
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isHeroSection, setIsHeroSection] = useState(true)
+  const pathname = usePathname();
+  const { openDialog } = useRegistration();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHeroSection, setIsHeroSection] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY
-      setIsScrolled(scrollY > 50)
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 50);
 
       // Check if we're in the hero section (first section)
-      const heroSection = document.querySelector("section")
+      const heroSection = document.querySelector("section");
       if (heroSection) {
-        const heroHeight = heroSection.offsetHeight
-        setIsHeroSection(scrollY < heroHeight - 100)
+        const heroHeight = heroSection.offsetHeight;
+        setIsHeroSection(scrollY < heroHeight - 100);
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    handleScroll() // Call once to set initial state
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Call once to set initial state
 
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Determine background based on current page and scroll position
   const getHeaderBackground = () => {
-    if (pathname === "/" || pathname === "/automation" || pathname === "/academy" || pathname === "/about") {
-      return isHeroSection ? "bg-transparent" : "bg-white/95 backdrop-blur-md"
+    if (
+      pathname === "/" ||
+      pathname === "/automation" ||
+      pathname === "/academy" ||
+      pathname === "/about"
+    ) {
+      return isHeroSection ? "bg-transparent" : "bg-white/95 backdrop-blur-md";
     }
-    return "bg-white/95 backdrop-blur-md"
-  }
+    return "bg-white/95 backdrop-blur-md";
+  };
 
   // Determine text color based on background
   const getTextColor = () => {
     if (
-      (pathname === "/" || pathname === "/automation" || pathname === "/academy" || pathname === "/about") &&
+      (pathname === "/" ||
+        pathname === "/automation" ||
+        pathname === "/academy" ||
+        pathname === "/about") &&
       isHeroSection
     ) {
-      return "text-white"
+      return "text-white";
     }
-    return "text-gray-900"
-  }
+    return "text-gray-900";
+  };
 
   // Determine logo to use
   const getLogo = () => {
     if (
-      (pathname === "/" || pathname === "/automation" || pathname === "/academy" || pathname === "/about") &&
+      (pathname === "/" ||
+        pathname === "/automation" ||
+        pathname === "/academy" ||
+        pathname === "/about") &&
       isHeroSection
     ) {
-      return "/envest-white-logo.png"
+      return "/envest-white-logo.png";
     }
-    return "/envest-main-logo.png"
-  }
+    return "/envest-main-logo.png";
+  };
 
   return (
-    <header className={cn("fixed top-0 z-50 w-full transition-all duration-300", getHeaderBackground(), className)}>
-      <div className="container mx-auto flex items-center justify-between py-4 px-4">
+    <header
+      className={cn(
+        "fixed top-0 z-50 w-full transition-all duration-300",
+        getHeaderBackground(),
+        className
+      )}
+    >
+      <div className="container mx-auto flex items-center justify-between py-3 px-4">
+        {/* Logo */}
         <Link href="/" className="inline-flex items-center">
           <Image
             src={getLogo() || "/placeholder.svg"}
@@ -86,6 +110,7 @@ export function SiteHeader({ className = "" }: { className?: string }) {
           />
         </Link>
 
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {nav.map((n) => (
             <Link
@@ -94,7 +119,7 @@ export function SiteHeader({ className = "" }: { className?: string }) {
               className={cn(
                 "text-sm font-medium transition-colors hover:opacity-80",
                 pathname === n.href ? "opacity-100" : "opacity-70",
-                getTextColor(),
+                getTextColor()
               )}
             >
               {n.label}
@@ -108,6 +133,7 @@ export function SiteHeader({ className = "" }: { className?: string }) {
           </Button>
         </nav>
 
+        {/* Mobile Navigation */}
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
@@ -118,9 +144,12 @@ export function SiteHeader({ className = "" }: { className?: string }) {
                 className={cn(
                   "border-opacity-20 bg-transparent",
                   isHeroSection &&
-                    (pathname === "/" || pathname === "/automation" || pathname === "/academy" || pathname === "/about")
+                    (pathname === "/" ||
+                      pathname === "/automation" ||
+                      pathname === "/academy" ||
+                      pathname === "/about")
                     ? "border-white text-white hover:bg-white/10"
-                    : "border-gray-300 text-gray-900 hover:bg-gray-100",
+                    : "border-gray-300 text-gray-900 hover:bg-gray-100"
                 )}
               >
                 <Menu className="h-5 w-5" />
@@ -128,29 +157,39 @@ export function SiteHeader({ className = "" }: { className?: string }) {
             </SheetTrigger>
             <SheetContent side="right" className="bg-white text-gray-900">
               <SheetHeader>
-                <SheetTitle className="flex items-center">
-                  <Image
-                    src="/envest-main-logo.png"
-                    alt="Envest Technologies"
-                    width={140}
-                    height={35}
-                    className="h-7 w-auto"
-                  />
-                </SheetTitle>
+                <div className="flex items-center justify-between">
+                  <SheetTitle className="flex items-center">
+                    <Image
+                      src="/envest-main-logo.png"
+                      alt="Envest Technologies"
+                      width={140}
+                      height={35}
+                      className="h-7 w-auto"
+                    />
+                  </SheetTitle>
+                </div>
               </SheetHeader>
-              <div className="mt-6 flex flex-col gap-4">
-                {nav.map((n) => (
-                  <Link
-                    key={n.label}
-                    href={n.href}
-                    className="text-base text-gray-700 hover:text-[#1DA37A] transition-colors"
-                  >
-                    {n.label}
-                  </Link>
-                ))}
+              <div className="mt-6 flex flex-col gap-6 p-6">
+                {/* Navigation Links */}
+                <nav className="flex flex-col gap-4 pl-8">
+                  {nav.map((n) => (
+                    <Link
+                      key={n.label}
+                      href={n.href}
+                      className="text-lg font-medium text-gray-700 hover:text-[#1DA37A] transition-colors"
+                    >
+                      {n.label}
+                    </Link>
+                  ))}
+                </nav>
+
+                {/* Divider */}
+                <div className="border-t border-gray-200 my-4"></div>
+
+                {/* Get Started Button */}
                 <Button
                   onClick={() => openDialog({ interest: "General" })}
-                  className="mt-4 bg-[#1DA37A] hover:bg-[#158A5A] text-white"
+                  className="bg-[#1DA37A] hover:bg-[#158A5A] text-white font-medium py-3"
                 >
                   Get Started
                 </Button>
@@ -160,5 +199,5 @@ export function SiteHeader({ className = "" }: { className?: string }) {
         </div>
       </div>
     </header>
-  )
+  );
 }

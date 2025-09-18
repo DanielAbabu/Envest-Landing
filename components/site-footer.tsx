@@ -94,7 +94,7 @@ export function SiteFooter() {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <Phone className="h-4 w-4 text-[#1DA37A] group-hover:scale-110 transition-transform duration-200" />
-                <span>+251 11 000 0000</span>
+                <span>+251 929 041 934</span>
               </motion.div>
               <motion.div
                 className="flex items-center gap-3 group"

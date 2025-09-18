@@ -122,30 +122,32 @@ export function IntroSnapshot() {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-white relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
+        {/* Header Section */}
         <motion.div
-          className="mx-auto max-w-4xl text-center mb-20"
+          className="mx-auto max-w-4xl text-center mb-12 md:mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <Badge className="bg-gray-100 text-gray-700 border-gray-200 mb-6 px-6 py-3 text-lg font-semibold">
+          <Badge className="bg-gray-100 text-gray-700 border-gray-200 mb-4 md:mb-6 px-4 py-2 md:px-6 md:py-3 text-sm md:text-lg font-semibold">
             Company Snapshot
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 md:mb-8 leading-tight">
             {"Innovating for Ethiopia's Future"}
           </h2>
-          <p className="text-lg md:text-lg text-gray-600 leading-relaxed max-w-screen-xl mx-auto">
+          <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
             {
               "Envest Technologies is an innovative AI automation and education company. We design intelligent systems for development and enterprise, run AI training programs to close the skills gap, and research local AI solutions for young professional training, work management, health, and more."
             }
           </p>
         </motion.div>
 
+        {/* Stats Section */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -154,36 +156,38 @@ export function IntroSnapshot() {
           {stats.map((s, i) => (
             <motion.div key={i} variants={itemVariants}>
               <div className="group relative">
-                <div className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden">
+                <div className="relative bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden">
                   <div className="relative z-10">
-                    <div className="relative mb-6">
+                    {/* Icon */}
+                    <div className="relative mb-4 md:mb-6">
                       <div
-                        className={`h-16 w-16 rounded-xl bg-gradient-to-br ${s.gradient} p-0.5 mx-auto`}
+                        className={`h-12 w-12 md:h-16 md:w-16 rounded-xl bg-gradient-to-br ${s.gradient} p-0.5 mx-auto`}
                       >
                         <div className="h-full w-full bg-white rounded-xl flex items-center justify-center">
-                          <s.icon className="h-8 w-8 text-gray-700" />
+                          <s.icon className="h-6 w-6 md:h-8 md:w-8 text-gray-700" />
                         </div>
                       </div>
                     </div>
 
+                    {/* Special Stats */}
                     {s.isSpecial ? (
                       <div className="text-center space-y-4">
-                        <div className="text-4xl md:text-5xl font-bold text-gray-900">
+                        <div className="text-3xl md:text-5xl font-bold text-gray-900">
                           <AnimatedCounter
                             target={s.value}
                             suffix={s.suffix}
                             duration={1500 + i * 200}
                           />
                         </div>
-                        <div className="text-lg font-semibold text-gray-600 uppercase tracking-wide mb-6">
+                        <div className="text-sm md:text-lg font-semibold text-gray-600 uppercase tracking-wide mb-4 md:mb-6">
                           {s.label}
                         </div>
                         <div className="space-y-3">
-                          <div className="grid grid-cols-2 gap-3">
+                          <div className="grid grid-cols-2 gap-2 md:gap-3">
                             {s.sectors?.map((sector, idx) => (
                               <motion.div
                                 key={sector}
-                                className="text-sm px-3 py-2 bg-gray-100 text-gray-700 rounded-full font-medium border border-gray-200"
+                                className="text-xs md:text-sm px-2 md:px-3 py-1 md:py-2 bg-gray-100 text-gray-700 rounded-full font-medium border border-gray-200"
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
@@ -200,14 +204,14 @@ export function IntroSnapshot() {
                       </div>
                     ) : (
                       <div className="text-center space-y-3">
-                        <div className="text-4xl md:text-5xl font-bold text-gray-900">
+                        <div className="text-3xl md:text-5xl font-bold text-gray-900">
                           <AnimatedCounter
                             target={s.value}
                             suffix={s.suffix}
                             duration={2000 + i * 300}
                           />
                         </div>
-                        <div className="text-lg font-semibold text-gray-600 uppercase tracking-wide">
+                        <div className="text-sm md:text-lg font-semibold text-gray-600 uppercase tracking-wide">
                           {s.label}
                         </div>
                         <motion.div

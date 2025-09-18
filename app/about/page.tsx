@@ -1,11 +1,11 @@
-import { RegistrationProvider } from "@/components/registration-provider"
-import { SiteHeader } from "@/components/site-header"
-import { AboutHero } from "@/components/about-hero"
-import { WhoWeAre } from "@/components/who-we-are"
-import { VisionMission } from "@/components/vision-mission"
-import { CoreValues } from "@/components/core-values"
-import { SiteFooter } from "@/components/site-footer"
-import { MobileStickyCTA } from "@/components/mobile-sticky-cta"
+import { RegistrationProvider } from "@/components/registration-provider";
+import { SiteHeader } from "@/components/site-header";
+import { AboutHero } from "@/components/about-hero";
+import { WhoWeAre } from "@/components/who-we-are";
+import { VisionMission } from "@/components/vision-mission";
+import { CoreValues } from "@/components/core-values";
+import { SiteFooter } from "@/components/site-footer";
+import { MobileStickyCTA } from "@/components/mobile-sticky-cta";
 
 export default function AboutPage() {
   return (
@@ -19,8 +19,7 @@ export default function AboutPage() {
           <CoreValues />
         </main>
         <SiteFooter />
-        <MobileStickyCTA />
       </div>
     </RegistrationProvider>
-  )
+  );
 }

@@ -1,11 +1,11 @@
-import { RegistrationProvider } from "@/components/registration-provider"
-import { SiteHeader } from "@/components/site-header"
-import { AutomationHero } from "@/components/automation-hero"
-import { AutomationApproach } from "@/components/automation-approach"
-import { AutomationImpactStories } from "@/components/automation-impact-stories"
-import { AutomationCTA } from "@/components/automation-cta"
-import { SiteFooter } from "@/components/site-footer"
-import { MobileStickyCTA } from "@/components/mobile-sticky-cta"
+import { RegistrationProvider } from "@/components/registration-provider";
+import { SiteHeader } from "@/components/site-header";
+import { AutomationHero } from "@/components/automation-hero";
+import { AutomationApproach } from "@/components/automation-approach";
+import { AutomationImpactStories } from "@/components/automation-impact-stories";
+import { AutomationCTA } from "@/components/automation-cta";
+import { SiteFooter } from "@/components/site-footer";
+import { MobileStickyCTA } from "@/components/mobile-sticky-cta";
 
 export default function AutomationPage() {
   return (
@@ -19,8 +19,7 @@ export default function AutomationPage() {
           <AutomationCTA />
         </main>
         <SiteFooter />
-        <MobileStickyCTA />
       </div>
     </RegistrationProvider>
-  )
+  );
 }

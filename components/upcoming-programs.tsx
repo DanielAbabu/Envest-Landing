@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Calendar, Clock, Users, Laptop, ArrowRight } from "lucide-react"
-import { useRegistration } from "./registration-provider"
+import { motion } from "framer-motion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Calendar, Clock, Users, Laptop, ArrowRight } from "lucide-react";
+import { useRegistration } from "./registration-provider";
 
 const programs = [
   {
@@ -16,30 +16,32 @@ const programs = [
     duration: "4-6 weeks",
     format: "Hybrid",
     level: "Intermediate",
-    status: "Enrolling Now",
+    status: "Coming Soon",
   },
   {
     icon: Calendar,
     title: "Online Courses & Webinars",
-    description: "Flexible modules for professionals and students who need to balance learning with work commitments.",
+    description:
+      "Flexible modules for professionals and students who need to balance learning with work commitments.",
     duration: "Self-paced",
     format: "Online",
     level: "All Levels",
-    status: "Available",
+    status: "Coming Soon",
   },
   {
     icon: Users,
     title: "Learning Tracks",
-    description: "Structured pathways for beginner to intermediate AI users, with clear progression milestones.",
+    description:
+      "Structured pathways for beginner to intermediate AI users, with clear progression milestones.",
     duration: "3-6 months",
     format: "Blended",
     level: "Beginner to Intermediate",
     status: "Coming Soon",
   },
-]
+];
 
 export function UpcomingPrograms() {
-  const { openDialog } = useRegistration()
+  const { openDialog } = useRegistration();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -50,7 +52,7 @@ export function UpcomingPrograms() {
         delayChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -62,7 +64,7 @@ export function UpcomingPrograms() {
         ease: "easeOut",
       },
     },
-  }
+  };
 
   return (
     <section className="py-16 md:py-20 bg-white">
@@ -74,9 +76,12 @@ export function UpcomingPrograms() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Upcoming Programs</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Upcoming Programs
+          </h2>
           <p className="text-lg text-gray-600 leading-relaxed">
-            Choose from our range of programs designed to meet you where you are in your AI learning journey.
+            Choose from our range of programs designed to meet you where you are
+            in your AI learning journey.
           </p>
         </motion.div>
 
@@ -100,16 +105,24 @@ export function UpcomingPrograms() {
                         program.status === "Available"
                           ? "default"
                           : program.status === "Enrolling Now"
-                            ? "secondary"
-                            : "outline"
+                          ? "secondary"
+                          : "outline"
                       }
-                      className={program.status === "Enrolling Now" ? "bg-[#1DA37A] text-white" : ""}
+                      className={
+                        program.status === "Enrolling Now"
+                          ? "bg-[#1DA37A] text-white"
+                          : ""
+                      }
                     >
                       {program.status}
                     </Badge>
                   </div>
-                  <CardTitle className="text-xl text-gray-900 mb-3">{program.title}</CardTitle>
-                  <p className="text-gray-600 leading-relaxed text-sm">{program.description}</p>
+                  <CardTitle className="text-xl text-gray-900 mb-3">
+                    {program.title}
+                  </CardTitle>
+                  <p className="text-gray-600 leading-relaxed text-sm">
+                    {program.description}
+                  </p>
                 </CardHeader>
                 <CardContent className="pt-0 px-6 pb-6">
                   <div className="space-y-3 mb-6">
@@ -131,7 +144,9 @@ export function UpcomingPrograms() {
                     className="w-full bg-[#1DA37A] hover:bg-[#158A5A] text-white"
                     disabled={program.status === "Coming Soon"}
                   >
-                    {program.status === "Coming Soon" ? "Notify Me" : "Learn More"}
+                    {program.status === "Coming Soon"
+                      ? "Notify Me"
+                      : "Learn More"}
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
                 </CardContent>
@@ -141,5 +156,5 @@ export function UpcomingPrograms() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

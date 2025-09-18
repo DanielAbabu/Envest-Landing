@@ -23,7 +23,6 @@ export default function AcademyPage() {
           <AcademyCTA />
         </main>
         <SiteFooter />
-        <MobileStickyCTA />
       </div>
     </RegistrationProvider>
   )

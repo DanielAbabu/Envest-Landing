@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Bot, GraduationCap, FlaskConical, ArrowRight } from "lucide-react"
-import { useRegistration } from "./registration-provider"
-import { motion } from "framer-motion"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Bot, GraduationCap, FlaskConical, ArrowRight } from "lucide-react";
+import { useRegistration } from "./registration-provider";
+import { motion } from "framer-motion";
 
 const items = [
   {
@@ -43,10 +43,10 @@ const items = [
     interest: "Partnership" as const,
     color: "#8bd5ff",
   },
-]
+];
 
 export function OfferingsGrid() {
-  const { openDialog } = useRegistration()
+  const { openDialog } = useRegistration();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -57,7 +57,7 @@ export function OfferingsGrid() {
         delayChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -69,7 +69,7 @@ export function OfferingsGrid() {
         ease: "easeOut",
       },
     },
-  }
+  };
 
   return (
     <section className="py-16 md:py-24 bg-white relative overflow-hidden">
@@ -81,14 +81,17 @@ export function OfferingsGrid() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">Core Offerings</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+            Core Offerings
+          </h2>
           <p className="text-lg md:text-xl text-gray-600">
-            Solutions that compound value across sectors and drive sustainable impact.
+            Solutions that compound value across sectors and drive sustainable
+            impact.
           </p>
         </motion.div>
 
         <motion.div
-          className="grid md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -99,35 +102,46 @@ export function OfferingsGrid() {
               <Card className="h-full border-gray-200 bg-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden">
                 <CardHeader className="pb-4 relative z-10">
                   <div
-                    className="h-16 w-16 rounded-xl flex items-center justify-center mb-4 relative overflow-hidden"
+                    className="h-14 w-14 sm:h-16 sm:w-16 rounded-xl flex items-center justify-center mb-4 relative overflow-hidden"
                     style={{ backgroundColor: `${it.color}15` }}
                   >
-                    <it.icon className="h-8 w-8" style={{ color: it.color }} />
+                    <it.icon
+                      className="h-6 w-6 sm:h-8 sm:w-8"
+                      style={{ color: it.color }}
+                    />
                   </div>
-                  <CardTitle className="text-xl font-bold text-gray-900">{it.title}</CardTitle>
+                  <CardTitle className="text-lg sm:text-xl font-bold text-gray-900">
+                    {it.title}
+                  </CardTitle>
                 </CardHeader>
 
                 <CardContent className="pt-0 relative z-10">
-                  <p className="text-gray-600 mb-6 leading-relaxed">{it.desc}</p>
+                  <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">
+                    {it.desc}
+                  </p>
 
-                  <ul className="space-y-3 mb-8">
+                  <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
                     {it.points.map((p, idx) => (
-                      <li key={p} className="flex items-start gap-3">
+                      <li key={p} className="flex items-start gap-2 sm:gap-3">
                         <div
-                          className="h-2 w-2 rounded-full mt-2 flex-shrink-0"
+                          className="h-2 w-2 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"
                           style={{ backgroundColor: it.color }}
                         ></div>
-                        <span className="text-sm text-gray-700">{p}</span>
+                        <span className="text-xs sm:text-sm text-gray-700">
+                          {p}
+                        </span>
                       </li>
                     ))}
                   </ul>
 
                   <Button
                     onClick={() => openDialog({ interest: it.interest })}
-                    className="w-full bg-[#1DA37A] hover:bg-[#158A5A] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full bg-[#1DA37A] hover:bg-[#158A5A] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base py-3 sm:py-4"
                   >
                     <span className="flex items-center gap-2">
-                      {it.title === "AI Academy" ? "Sign up for Training" : "Get Started"}
+                      {it.title === "AI Academy"
+                        ? "Sign up for Training"
+                        : "Get Started"}
                       <ArrowRight className="h-4 w-4" />
                     </span>
                   </Button>
@@ -138,5 +152,5 @@ export function OfferingsGrid() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
