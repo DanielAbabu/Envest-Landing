@@ -35,7 +35,7 @@ export function AcademyHero() {
   return (
     <ShaderBackground>
       <section className="relative overflow-hidden min-h-screen flex items-center">
-        <div className="container mx-auto py-20 relative z-10 px-4 md:px-8">
+        <div className="container mx-auto py-16 md:py-20 relative z-10 px-4 sm:px-6">
           <motion.div
             className="max-w-4xl mx-auto text-center"
             variants={containerVariants}
@@ -45,10 +45,10 @@ export function AcademyHero() {
             {/* Header */}
             <motion.div
               variants={itemVariants}
-              className="flex items-center justify-center gap-3 mb-6"
+              className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6"
             >
-              <GraduationCap className="h-8 w-8 text-[#8bd5ff]" />
-              <p className="text-lg font-semibold tracking-wide uppercase text-[#8bd5ff]">
+              <GraduationCap className="h-6 w-6 sm:h-8 sm:w-8 text-[#8bd5ff]" />
+              <p className="text-sm sm:text-lg font-semibold tracking-wide uppercase text-[#8bd5ff]">
                 AI Academy
               </p>
             </motion.div>
@@ -56,7 +56,7 @@ export function AcademyHero() {
             {/* Main Title */}
             <motion.h1
               variants={itemVariants}
-              className="text-4xl md:text-5xl lg:text-5xl font-bold leading-tight mb-6 text-[#EEFCF7]"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4 sm:mb-6 text-[#EEFCF7]"
             >
               Master AI Skills for Ethiopia's Future
             </motion.h1>
@@ -64,13 +64,13 @@ export function AcademyHero() {
             {/* Subtitle */}
             <motion.p
               variants={itemVariants}
-              className="text-lg md:text-lg text-[#9d9d9d] leading-relaxed mb-10 max-w-3xl mx-auto"
+              className="text-sm sm:text-base md:text-lg text-[#9d9d9d] leading-relaxed mb-6 sm:mb-10 max-w-3xl mx-auto"
             >
               Practical, job-ready AI training designed for Ethiopia's
               development professionals, entrepreneurs, and students.
             </motion.p>
 
-            {/* CTA Buttons*/}
+            {/* CTA Buttons */}
             <motion.div
               variants={itemVariants}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
@@ -78,14 +78,14 @@ export function AcademyHero() {
               <Button
                 size="lg"
                 onClick={() => openDialog({ interest: "Academy" })}
-                className="bg-[#0C4531] hover:bg-[#] text-[#EEFCF7] font-semibold px-8 py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-[#0C4531] hover:bg-[#0A3A28] text-[#EEFCF7] font-semibold px-6 sm:px-8 py-3 text-sm sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 Join the Academy
-                <ArrowRight className="h-5 w-5 ml-2" />
+                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
               </Button>
               <button
                 onClick={() => openDialog({ interest: "Academy" })}
-                className="text-lg font-semibold text-[#0F573E] hover:text-white transition-all duration-300 underline-offset-4 hover:underline"
+                className="text-sm sm:text-lg font-semibold text-[#0F573E] hover:text-white transition-all duration-300 underline-offset-4 hover:underline"
               >
                 Explore Programs
               </button>
